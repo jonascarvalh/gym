@@ -16,3 +16,6 @@ class Registration(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True
     )
+
+    def __str__(self):
+        return f'{self.user.first_name} {self.user.last_name}'
