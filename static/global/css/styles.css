@@ -1,0 +1,32 @@
+:root {
+    --color-primary: #003366;
+    --spacing-gutter-medium: 3rem;
+    --spacing-gutter-large: 4rem;
+    --spacing-gutter-extralarge: 10rem;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container img {
+    width:10rem;
+}
+
+.nav-config a{
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.button-1 {
+    border: 3px solid;
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    border-radius: 5px;
+}
+
+.main-container {
+    padding: 0;
+}
