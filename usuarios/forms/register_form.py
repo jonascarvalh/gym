@@ -89,6 +89,17 @@ class RegisterForm(forms.ModelForm):
             )
         return email
     
+    def clean_username(self):
+        username = self.cleaned_data.get('username', '')
+        exists = User.objects.filter(username=username).exists()
+
+        if exists:
+            raise ValidationError(
+                'Este nome de usuário já está sendo utilizado!',
+                code='invalid',
+            )
+        return username
+    
     def clean(self):
         cleaned_data = super().clean()
         password = cleaned_data.get('password')
@@ -99,7 +110,7 @@ class RegisterForm(forms.ModelForm):
         
         if password != password2:
             password_confirmation_error = ValidationError(
-                'As senhas digitadas não são iguais',
+                'As senhas digitadas não são iguais.',
                 code='invalid'
             )
             raise ValidationError({

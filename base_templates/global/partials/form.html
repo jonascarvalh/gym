@@ -19,16 +19,21 @@
         {% if form.errors %}
             <div class="form-content form-content-grid">
                 <div class="form-group">
-                    <div class="message message-error">
-                        There are errors in the form, please fix them and send again.
+                    <div class="message message-error my-2">
+                        Existem erros nesse formulário, por favor corrija os itens.
                     </div>
                 </div>
             </div>
         {% endif %}
+        <div class="form-content form-content-grid my-2">
+            <div class="form-group">
+                {% include "global/partials/message.html" %}
+            </div>
+        </div>
         <div class="form-content form-content-grid">
-            <p class="my-4">Já possui conta? <a href="#">Entrar</a></p>
-            <div class="d-flex justify-content-end form-group py-3">
-                <button type="submit" class="btn btn-primary align-self-end">Registrar</button>
+            <p class="my-2">Já possui conta? <a href="#">Entrar</a></p>
+            <div class="d-flex justify-content-end form-group">
+                <button type="submit" class="btn btn-primary">Registrar</button>
             </div>
         </div>
     </form>

@@ -9,12 +9,12 @@ def add_placeholder(field, placeholder_val):
     add_attr(field, 'placeholder', placeholder_val)
 
 def strong_password(password):
-    regex = r'^.{8}$'
+    regex = re.compile(r'^.{8}$')
 
     if not regex.match(password):
         raise ValidationError(
             (
-                'A senha precisa ter pelo menos 8 caracteres.'
+                'A senha precisa conter pelo menos 8 caracteres.'
             ),
             code='invalid'
         )
