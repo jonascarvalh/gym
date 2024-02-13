@@ -2,6 +2,7 @@
 
 :root {
     --color-primary: #003366;
+    --color-white: #fff;
     --spacing-gutter-medium: 3rem;
     --spacing-gutter-large: 4rem;
     --spacing-gutter-extralarge: 10rem;
@@ -36,4 +37,69 @@
 .container {
     font-family: "Roboto", sans-serif;
     font-weight: semibold;
+}
+
+
+/* Form */
+.form-content {
+    max-width: 48rem; /* 64*100 */
+    margin: 0 auto;
+}
+
+.form-content label, 
+.form-content .help-text,
+.errorlist {
+    display: block;
+    margin: 0.5rem 0;
+    list-style: none;
+}
+
+.errorlist {
+    color: var(--color-error-dark);
+}
+.form-content input {
+    border-radius: 0.4rem;
+    border: 1px var(--color-primary);
+}
+
+.form-content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    gap: calc(var(--spacing-gutter-medium)/16) var(--spacing-gutter-medium);
+}
+
+.form-content button {
+    border: 1px var(--color-primary);
+    border-radius: 0.4rem;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.form-content button:hover{
+    cursor: pointer;
+}
+
+.plaintext-button {
+    display: inline;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--color-primary);
+}
+
+.inline-form {
+    display: inline;
+}
+
+.background-register {
+    background-color: #E2ECF4;
+}
+
+.form-content a{
+    color: var(--color-primary);
+    /* text-decoration: none; */
+}
+
+.button-end {
+    align-self: flex-end;
 }

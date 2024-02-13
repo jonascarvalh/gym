@@ -16,8 +16,8 @@ class RegisterForm(forms.ModelForm):
 
         for i, value in self.fields.items():
             add_attr(self.fields[i], 'class', 'form-control')
-            if self.fields[i].help_text == '':
-                add_attr(self.fields[i], 'class', 'mb-3')
+            # if self.fields[i].help_text == '':
+            #     add_attr(self.fields[i], 'class', 'mb-3')
 
     class Meta:
         model = User
@@ -44,7 +44,7 @@ class RegisterForm(forms.ModelForm):
         label='Nome de Usuário',
         help_text=(
             'O usuário deve possuir letras, números ou esses caracteres @/./+/-/_. '
-            'Deve possuir no mínimo 4 e máximo de 150 caracteres.'
+            'Deve possuir no mínimo 4 e máximo 150 caracteres.'
         ),
         error_messages= {
             'required': 'Esse campo não pode ser vazio.',
@@ -72,7 +72,7 @@ class RegisterForm(forms.ModelForm):
     password2 = forms.CharField(
         required=True,
         widget=forms.PasswordInput(),
-        label='Confirmar Senha:',
+        label='Confirmar Senha',
         error_messages={
             'required': 'Repita sua senha, por favor!'
         }

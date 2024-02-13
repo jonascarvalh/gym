@@ -1,4 +1,4 @@
-<div class="container p-3">
+<div class="container background-register p-3">
     <h1 class="text-center">Registro</h1>
     <form action="{{ form_action }}" method="POST"> {% csrf_token %}
         <div class="form-content form-content-grid">
@@ -9,7 +9,7 @@
                     </label>
                     {{field}}
                     {% if field.help_text %}
-                        <div class="form-text mb-3">{{field.help_text}}</div>
+                        <div class="form-text">{{field.help_text}}</div>
                     {% endif %}
 
                     {{field.errors}}
@@ -26,8 +26,9 @@
             </div>
         {% endif %}
         <div class="form-content form-content-grid">
-            <div class="form-group py-3">
-                <button type="submit" class="btn btn-primary">Enviar</button>
+            <p class="my-4">Já possui conta? <a href="#">Entrar</a></p>
+            <div class="d-flex justify-content-end form-group py-3">
+                <button type="submit" class="btn btn-primary align-self-end">Registrar</button>
             </div>
         </div>
     </form>
