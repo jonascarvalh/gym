@@ -1,0 +1,34 @@
+<div class="container p-3">
+    <h1 class="text-center">Registro</h1>
+    <form action="{{ form_action }}" method="POST"> {% csrf_token %}
+        <div class="form-content form-content-grid">
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{field.id_for_label}}" class="form-label">
+                        {{field.label}}
+                    </label>
+                    {{field}}
+                    {% if field.help_text %}
+                        <div class="form-text mb-3">{{field.help_text}}</div>
+                    {% endif %}
+
+                    {{field.errors}}
+                </div>
+            {% endfor %}
+        </div>
+        {% if form.errors %}
+            <div class="form-content form-content-grid">
+                <div class="form-group">
+                    <div class="message message-error">
+                        There are errors in the form, please fix them and send again.
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        <div class="form-content form-content-grid">
+            <div class="form-group py-3">
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+        </div>
+    </form>
+</div>

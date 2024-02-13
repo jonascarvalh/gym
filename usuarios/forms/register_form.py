@@ -7,13 +7,27 @@ from utils.django_forms import add_attr, add_placeholder, strong_password
 class RegisterForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        add_placeholder(self.fields['username'], 'johndoe1')
-        add_placeholder(self.fields['first_name'], 'John')
-        add_placeholder(self.fields['last_name'], 'Doe')
-        add_placeholder(self.fields['e-mail'], 'johndoe1@uema.br')
+        add_placeholder(self.fields['username'], 'Seu usuário')
+        add_placeholder(self.fields['first_name'], 'Seu nome')
+        add_placeholder(self.fields['last_name'], 'Seu sobrenome')
+        add_placeholder(self.fields['email'], 'Seu e-mail')
         add_placeholder(self.fields['password'], 'Digite sua senha')
-        add_placeholder(self.fields['password'], 'Repita sua senha')
+        add_placeholder(self.fields['password2'], 'Repita sua senha')
 
+        for i, value in self.fields.items():
+            add_attr(self.fields[i], 'class', 'form-control')
+            if self.fields[i].help_text == '':
+                add_attr(self.fields[i], 'class', 'mb-3')
+
+    class Meta:
+        model = User
+        fields = [
+            'first_name',
+            'last_name',
+            'username',
+            'email',
+            'password'
+        ]
     first_name = forms.CharField(
         error_messages={'required': 'Digite seu nome.'},
         required=True,
@@ -29,8 +43,8 @@ class RegisterForm(forms.ModelForm):
     username = forms.CharField(
         label='Nome de Usuário',
         help_text=(
-            'O usuário deve possuir letras, números ou esses caracteres @/./+/-/_.'
-            'Deve possuir no mínimo 4 e máximo de 150 caracteres'
+            'O usuário deve possuir letras, números ou esses caracteres @/./+/-/_. '
+            'Deve possuir no mínimo 4 e máximo de 150 caracteres.'
         ),
         error_messages= {
             'required': 'Esse campo não pode ser vazio.',
