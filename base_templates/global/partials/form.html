@@ -1,6 +1,6 @@
 <div class="container background-register p-5 mt-3">
     <div class="mb-3">
-        <h1 class="text-center">Registro</h1>
+        <h1 class="text-center">{{ title }}</h1>
     </div>
     <form action="{{ form_action }}" method="POST"> {% csrf_token %}
         <div class="form-content form-content-grid">
@@ -33,9 +33,8 @@
             </div>
         </div>
         <div class="form-content form-content-grid">
-            <p class="my-2">Já possui conta? <a href="#">Entrar</a></p>
             <div class="d-flex justify-content-end form-group">
-                <button type="submit" class="btn btn-primary">Registrar</button>
+                <button type="submit" class="btn btn-primary">{{ title }}</button>
             </div>
         </div>
     </form>

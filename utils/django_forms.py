@@ -10,7 +10,6 @@ def add_placeholder(field, placeholder_val):
 
 def strong_password(password):
     regex = r'^.{8,}$'
-    print(re.match(regex, password))
     if not re.match(regex, password):
         raise ValidationError(
             (

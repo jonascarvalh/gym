@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import RegisterForm
+from .forms import RegisterForm, LoginForm
 from django.contrib import messages
 from django.http import Http404
 from django.urls import reverse
+from django.contrib.auth import authenticate, login, logout
 
 def register_view(request):
     register_form_data = request.session.get('register_form_data', None)
@@ -12,6 +13,7 @@ def register_view(request):
     return render(
         request, 'usuarios/pages/register_view.html', {
             'form': form,
+            'title': 'Resgistrar',
             'form_action': reverse('usuarios:register_create'),
     })
 
@@ -34,3 +36,34 @@ def register_create(request):
         return redirect(reverse('usuarios:register'))
     
     return redirect('usuarios:register')
+
+def login_view(request):
+    form = LoginForm()
+    return render(request, 'usuarios/pages/login_view.html', {
+        'form': form,
+        'title': 'Login',
+        'form_action': reverse('usuarios:login_create')
+    })
+
+def login_create(request):
+        if not request.POST:
+            raise Http404()
+    
+        form = LoginForm(request.POST)
+        login_url = reverse('usuarios:login')
+
+        if form.is_valid():
+            authenticated_user = authenticate(
+                email=form.cleaned_data.get('email', ''),
+                password=form.cleaned_data.get('password', '')
+            )
+
+            if authenticated_user is not None:
+                messages.success(request, 'Você foi logado.')
+                login(request, authenticated_user)
+            else:
+                messages.error(request, 'Credenciais inválidas.')
+        else:
+            messages.error(request, 'E-mail ou senha inválidos.')
+        
+        return redirect(login_url)
