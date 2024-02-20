@@ -1,5 +1,7 @@
-<div class="container background-register p-3">
-    <h1 class="text-center">Registro</h1>
+<div class="container background-register p-5 mt-3">
+    <div class="mb-3">
+        <h1 class="text-center">Registro</h1>
+    </div>
     <form action="{{ form_action }}" method="POST"> {% csrf_token %}
         <div class="form-content form-content-grid">
             {% for field in form %}
