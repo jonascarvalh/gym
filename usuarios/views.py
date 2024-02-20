@@ -4,8 +4,9 @@ from .forms import RegisterForm, LoginForm
 from django.contrib import messages
 from django.http import Http404
 from django.urls import reverse
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import login, logout
 from utils.django_auth import authenticate_by_email
+from django.contrib.auth.decorators import login_required
 
 def register_view(request):
     register_form_data = request.session.get('register_form_data', None)
@@ -68,3 +69,14 @@ def login_create(request):
         messages.error(request, 'E-mail ou senha inválidos.')
     
     return redirect(login_url)
+
+@login_required(login_url='usuarios:login', redirect_field_name='next')
+def logout_view(request):
+    if not request.POST:
+        return redirect('usuarios:login')
+    
+    if request.POST.get('username') != request.user.username:
+        return redirect('usuarios:login')
+    
+    logout(request)
+    return redirect(reverse('usuarios:login'))
