@@ -15,7 +15,7 @@ def register_view(request):
     return render(
         request, 'usuarios/pages/register_view.html', {
             'form': form,
-            'title': 'Resgistrar',
+            'title': 'Registrar',
             'form_action': reverse('usuarios:register_create'),
     })
 
