@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.http import Http404
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
+from utils.django_auth import authenticate_by_email
 
 def register_view(request):
     register_form_data = request.session.get('register_form_data', None)
@@ -46,24 +47,24 @@ def login_view(request):
     })
 
 def login_create(request):
-        if not request.POST:
-            raise Http404()
-    
-        form = LoginForm(request.POST)
-        login_url = reverse('usuarios:login')
+    if not request.POST:
+        raise Http404()
 
-        if form.is_valid():
-            authenticated_user = authenticate(
-                email=form.cleaned_data.get('email', ''),
-                password=form.cleaned_data.get('password', '')
-            )
+    form = LoginForm(request.POST)
+    login_url = reverse('usuarios:login')
 
-            if authenticated_user is not None:
-                messages.success(request, 'Você foi logado.')
-                login(request, authenticated_user)
-            else:
-                messages.error(request, 'Credenciais inválidas.')
+    if form.is_valid():
+        authenticated_user = authenticate_by_email(
+            email=form.cleaned_data.get('email', ''),
+            password=form.cleaned_data.get('password', '')
+        )
+
+        if authenticated_user is not None:
+            messages.success(request, 'Você foi logado.')
+            login(request, authenticated_user)
         else:
-            messages.error(request, 'E-mail ou senha inválidos.')
-        
-        return redirect(login_url)
+            messages.error(request, 'Credenciais inválidas.')
+    else:
+        messages.error(request, 'E-mail ou senha inválidos.')
+    
+    return redirect(login_url)

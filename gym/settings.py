@@ -139,5 +139,4 @@ MESSAGE_TAGS = {
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend', # Se estiver utilizando django-allauth
 ]
