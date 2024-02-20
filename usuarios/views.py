@@ -40,6 +40,9 @@ def register_create(request):
     return redirect('usuarios:register')
 
 def login_view(request):
+    if request.user.is_authenticated:
+        return redirect(reverse('usuarios:menu'))
+
     form = LoginForm()
     return render(request, 'usuarios/pages/login_view.html', {
         'form': form,
@@ -52,7 +55,6 @@ def login_create(request):
         raise Http404()
 
     form = LoginForm(request.POST)
-    login_url = reverse('usuarios:login')
 
     if form.is_valid():
         authenticated_user = authenticate_by_email(
@@ -68,7 +70,7 @@ def login_create(request):
     else:
         messages.error(request, 'E-mail ou senha inválidos.')
     
-    return redirect(login_url)
+    return redirect(reverse('usuarios:menu'))
 
 @login_required(login_url='usuarios:login', redirect_field_name='next')
 def logout_view(request):
@@ -80,3 +82,7 @@ def logout_view(request):
     
     logout(request)
     return redirect(reverse('usuarios:login'))
+
+@login_required(login_url='usuarios:login', redirect_field_name='next')
+def menu_view(request):
+    return render(request, 'usuarios/pages/menu_view.html')

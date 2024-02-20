@@ -46,10 +46,23 @@
     font-weight: semibold;
 }
 
+.card-alignment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1 300px;
+    flex-wrap: wrap;
+    gap: 3.5rem;
+}
+
+.icons-style {
+    font-size: 8rem;
+    text-align: center;
+}
 
 /* Form */
 .form-content {
-    max-width: 48rem; /* 64*100 */
+    max-width: 48rem; /* 48*100 */
     margin: 0 auto;
 }
 
