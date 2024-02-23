@@ -9,6 +9,9 @@ from utils.django_auth import authenticate_by_email
 from django.contrib.auth.decorators import login_required
 
 def register_view(request):
+    if request.user.is_authenticated:
+        return redirect('users:menu')
+
     register_form_data = request.session.get('register_form_data', None)
     form = RegisterForm(register_form_data)
 
