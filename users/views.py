@@ -13,10 +13,10 @@ def register_view(request):
     form = RegisterForm(register_form_data)
 
     return render(
-        request, 'usuarios/pages/register_view.html', {
+        request, 'users/pages/register_view.html', {
             'form': form,
             'title': 'Registrar',
-            'form_action': reverse('usuarios:register_create'),
+            'form_action': reverse('users:register_create'),
     })
 
 def register_create(request):
@@ -35,19 +35,19 @@ def register_create(request):
         messages.success(request, 'Usuário criado, você pode fazer login.')
 
         del(request.session['register_form_data'])
-        return redirect(reverse('usuarios:register'))
+        return redirect(reverse('users:register'))
     
-    return redirect('usuarios:register')
+    return redirect('users:register')
 
 def login_view(request):
     if request.user.is_authenticated:
-        return redirect(reverse('usuarios:menu'))
+        return redirect(reverse('users:menu'))
 
     form = LoginForm()
-    return render(request, 'usuarios/pages/login_view.html', {
+    return render(request, 'users/pages/login_view.html', {
         'form': form,
         'title': 'Login',
-        'form_action': reverse('usuarios:login_create')
+        'form_action': reverse('users:login_create')
     })
 
 def login_create(request):
@@ -70,19 +70,19 @@ def login_create(request):
     else:
         messages.error(request, 'E-mail ou senha inválidos.')
     
-    return redirect(reverse('usuarios:menu'))
+    return redirect(reverse('users:menu'))
 
-@login_required(login_url='usuarios:login', redirect_field_name='next')
+@login_required(login_url='users:login', redirect_field_name='next')
 def logout_view(request):
     if not request.POST:
-        return redirect('usuarios:login')
+        return redirect('users:login')
     
     if request.POST.get('username') != request.user.username:
-        return redirect('usuarios:login')
+        return redirect('users:login')
     
     logout(request)
-    return redirect(reverse('usuarios:login'))
+    return redirect(reverse('users:login'))
 
-@login_required(login_url='usuarios:login', redirect_field_name='next')
+@login_required(login_url='users:login', redirect_field_name='next')
 def menu_view(request):
-    return render(request, 'usuarios/pages/menu_view.html')
+    return render(request, 'users/pages/menu_view.html')

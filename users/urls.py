@@ -1,7 +1,7 @@
 from django.urls import path, include
-from usuarios.views import register_view, register_create, login_view, login_create, logout_view, menu_view
+from users.views import register_view, register_create, login_view, login_create, logout_view, menu_view
 
-app_name = 'usuarios'
+app_name = 'users'
 
 urlpatterns = [
     path('register/', register_view, name='register'),

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from usuarios.models import Registration
+from enrollment.models import Registration
 
 
 # Register your models here.
