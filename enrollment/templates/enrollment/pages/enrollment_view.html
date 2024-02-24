@@ -27,5 +27,26 @@
                 {% endfor %}
             </tbody>
         </table>
+        <nav aria-label="...">
+            <ul class="pagination">
+                {% if registers.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ registers.previous_page_number }}">Anterior</a>
+                    </li>
+                    <li class="page-item" aria-current="page">
+                        <a class="page-link" href="?page={{ registers.previous_page_number }}">{{ registers.previous_page_number }}</a>
+                    </li>
+                {% endif %}
+
+                <li class="page-item active" aria-current="page">
+                    <a class="page-link" href="#">{{ registers.number }}</a>
+                </li>
+                
+                {% if registers.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ registers.next_page_number }}">{{ registers.next_page_number }}</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ registers.next_page_number }}">Próxima</a></li>
+                {% endif %}
+            </ul>
+          </nav>
     </div>
 {% endblock content %}

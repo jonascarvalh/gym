@@ -12,5 +12,5 @@ def enrollment_view(request):
     objs_per_page = paginator.get_page(page)
 
     return render(request,'enrollment/pages/enrollment_view.html', {
-        'registers': objs_per_page
+        'registers': objs_per_page,
     })
