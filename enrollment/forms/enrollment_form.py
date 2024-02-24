@@ -6,12 +6,14 @@ from enrollment.models import Registration
 
 class RegisterForm(forms.ModelForm):
     choice_ocupation = [
+        ('', 'Selecione'),
         ('E', 'Estudante'), 
         ('Ex', 'Público Externo'),
         ('F', 'Funcionário')
     ]
 
     choice_registered = [
+        ('', 'Selecione'),
         ('True', 'Matriculado'),
         ('False', 'Não Matriculado'),
     ]
@@ -69,7 +71,7 @@ class RegisterForm(forms.ModelForm):
 
     is_registered = forms.ChoiceField(
         required=True,
-        widget=forms.Select(choices=choice_registered, attrs={'disabled': False}),
+        widget=forms.Select(attrs={'disabled': False}),
         error_messages={'required': 'Este campo é obrigatório.'},
         label='Matriculado',
         choices=choice_registered,
