@@ -5,14 +5,14 @@
 {% endblock title %}
 
 {% block content %}
-    <div class="container mt-3">
-        <h2 class="text-center mb-3">Matrículas</h2>
+    <div class="container mt-2">
+        <h2 class="text-center mb-1">Matrículas</h2>
         <div class="space-search">
             <div class="inline-form">
                 {% include "global/partials/search.html" %}
             </div>            
             <div>
-                <a class="btn button-1" href=" {% url "enrollment:add_view" %}">Adicionar</a>
+                <a class="btn button-1" href=" {% url 'enrollment:add_view' %}">Adicionar</a>
             </div>
         </div>
         <table class="table table-striped">
@@ -30,7 +30,17 @@
                         <td>{{ register.name }}</td>
                         <td>{{ register.is_registered }}</td>
                         <td>{{ register.get_ocupation_display }}</td>
-                        <td>Visualizar  Editar  Apagar</td>
+                        <td>
+                            <a class="btn button-view me-1" href="">
+                                <i class="fa-solid fa-eye"></i>
+                            </a>
+                            <a class="btn button-edit me-1" href="">
+                                <i class="fa-solid fa-pen"></i>
+                            </a>
+                            <a class="btn button-delete me-1" href="">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

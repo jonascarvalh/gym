@@ -48,6 +48,22 @@
     background-color: var(--color-primary);
 }
 
+
+.button-view {
+    color: var(--color-white);
+    background-color: #5BC0DE;
+}
+
+.button-edit {
+    color: var(--color-white);
+    background-color: #F0AD4E;
+}
+
+.button-delete {
+    color: var(--color-white);
+    background-color: #D9534F;
+}
+
 .button-1:hover {
     border: 3px solid;
     color: var(--color-white);

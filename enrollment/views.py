@@ -11,7 +11,7 @@ from django.contrib import messages
 def enrollment_view(request):
     registers = Registration.objects.all()
 
-    paginator = Paginator(registers, 10)
+    paginator = Paginator(registers, 8)
     page      = request.GET.get('page')
     objs_per_page = paginator.get_page(page)
 
@@ -33,7 +33,7 @@ def search(request):
     ).order_by('-id')
 
 
-    paginator = Paginator(registers, 10)
+    paginator = Paginator(registers, 8)
     page      = request.GET.get('page')
     objs_per_page = paginator.get_page(page)
 
