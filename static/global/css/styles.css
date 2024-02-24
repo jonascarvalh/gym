@@ -191,7 +191,7 @@
     color: var(--color-debug-dark);
 }
 
-.button-search{
+.space-search{
     display: flex;
     justify-content: space-between;
 }

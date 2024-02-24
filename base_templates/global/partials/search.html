@@ -1,0 +1,9 @@
+<form action="{% url "enrollment:search" %}" method="GET" class="form-inline">
+    <div class="input-group">
+        <input type="search" class="form-control mr-2" name="q" value="{{ search_term }}" placeholder="Digite para pesquisar..." required>
+        <div style="margin-left: 10px;"></div>
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-outline-success ml-2"><i class="fas fa-search"></i></button>
+        </div>
+    </div>
+</form>
