@@ -7,15 +7,12 @@ class Registration(models.Model):
         ('E', 'Estudante'), 
         ('F', 'Funcionário')
     )
-
-    ocupation = models.CharField(max_length=2, choices=choice)
-    cpf = models.CharField(max_length=11, unique=True)
-    sig_register = models.CharField(max_length=11, unique=True)
+        
+    name          = models.CharField(max_length=100, null=False)
+    cpf           = models.CharField(max_length=11, unique=True, null=False)
+    sig_register  = models.CharField(max_length=11, unique=True, null=False)
+    ocupation     = models.CharField(max_length=2, choices=choice, null=False)
     is_registered = models.BooleanField()
-
-    user = models.ForeignKey(
-        User, on_delete=models.SET_NULL, null=True
-    )
-
+    
     def __str__(self):
-        return f'{self.user.first_name} {self.user.last_name}'
+        return self.name

@@ -5,5 +5,27 @@
 {% endblock title %}
 
 {% block content %}
-    <h1>Hello Enrollment</h1>
+    <div class="container">
+        <h2>Matrículas</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Matriculado</th>
+                    <th>Ocupação</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for register in registers %}
+                    <tr>
+                        <td>{{ register.name }}</td>
+                        <td>{{ register.is_registered }}</td>
+                        <td>{{ register.get_ocupation_display }}</td>
+                        <td>Visualizar  Editar  Apagar</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock content %}
