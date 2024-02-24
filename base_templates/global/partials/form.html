@@ -10,7 +10,7 @@
                         {{field.label}}
                     </label>
                     {{field}}
-                    {% if field.help_text %}
+                    {% if field.help_text and form_action %}
                         <div class="form-text">{{field.help_text}}</div>
                     {% endif %}
                     {{field.errors}}
@@ -31,10 +31,12 @@
                 {% include "global/partials/message.html" %}
             </div>
         </div>
-        <div class="form-content form-content-grid">
-            <div class="d-flex justify-content-end form-group">
-                <button type="submit" class="btn btn-primary">{{ title }}</button>
+        {% if form_action %}
+            <div class="form-content form-content-grid">
+                <div class="d-flex justify-content-end form-group">
+                    <button type="submit" class="btn btn-primary">{{ title }}</button>
+                </div>
             </div>
-        </div>
+        {% endif %}
     </form>
 </div>
