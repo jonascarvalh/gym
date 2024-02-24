@@ -3,6 +3,8 @@ from django.http import HttpResponse, Http404
 from enrollment.models import Registration
 from django.core.paginator import Paginator
 from django.db.models import Q
+from .forms import RegisterForm
+from django.urls import reverse
 
 # Create your views here.
 def enrollment_view(request):
@@ -36,4 +38,18 @@ def search(request):
 
     return render(request,'enrollment/pages/enrollment_view.html', {
         'registers': objs_per_page,
+    })
+
+def register_view(request):
+    if request.user.is_authenticated:
+        return redirect('users:menu')
+
+    register_form_data = request.session.get('register_form_data', None)
+    form = RegisterForm(register_form_data)
+
+    return render(
+        request, 'users/pages/register_view.html', {
+            'form': form,
+            'title': 'Adicionar',
+            'form_action': reverse('users:register_create'), # change here
     })
