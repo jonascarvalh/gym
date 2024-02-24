@@ -40,7 +40,7 @@ def search(request):
         'registers': objs_per_page,
     })
 
-def register_view(request):
+def add_view(request):
     if request.user.is_authenticated:
         return redirect('users:menu')
 
@@ -51,5 +51,7 @@ def register_view(request):
         request, 'users/pages/register_view.html', {
             'form': form,
             'title': 'Adicionar',
-            'form_action': reverse('users:register_create'), # change here
+            'form_action': reverse('enrollment:add_create'), # change here
     })
+
+

@@ -75,44 +75,27 @@ class RegisterForm(forms.ModelForm):
         choices=choice_registered
     )
 
-    def clean_email(self):
-        email = self.cleaned_data.get('email', '')
-        exists = User.objects.filter(email=email).exists()
+    def clean_cpf(self):
+        cpf = self.cleaned_data.get('cpf', '')
+        exists = User.objects.filter(cpf=cpf).exists()
 
         if exists:
             raise ValidationError(
-                'O e-mail já está sendo utilizado!',
+                'Este CPF já foi cadastrado!',
                 code='invalid',
             )
-        return email
+        return cpf
     
-    def clean_username(self):
-        username = self.cleaned_data.get('username', '')
-        exists = User.objects.filter(username=username).exists()
+    def clean_sig(self):
+        sig_register = self.cleaned_data.get('sig_register', '')
+        exists = User.objects.filter(sig_register=sig_register).exists()
 
         if exists:
             raise ValidationError(
-                'Este nome de usuário já está sendo utilizado!',
+                'Esta matrícula já foi efetuada!',
                 code='invalid',
             )
-        return username
+        return sig_register
     
     def clean(self):
         cleaned_data = super().clean()
-        password = cleaned_data.get('password')
-        password2 = cleaned_data.get('password2')
-
-        if password is None:
-            return
-        
-        if password != password2:
-            password_confirmation_error = ValidationError(
-                'As senhas digitadas não são iguais.',
-                code='invalid'
-            )
-            raise ValidationError({
-                'password': password_confirmation_error,
-                # 'password2': [
-                #     password_confirmation_error,
-                # ],
-            })
