@@ -19,13 +19,15 @@
               <h5 class="card-title text-center">Avaliações</h5>
             </div>
         </div>
-        <div class="card" style="width: 15rem; border: none;">
-            <p class="icons-style">
-                <i class="fa-solid fa-users"></i>
-            </p>
-            <div class="card-body">
-              <h5 class="card-title text-center">Matrículas</h5>
+        <a href="{% url 'enrollment:enrollment_view' %}" style="text-decoration: none;">
+            <div class="card" style="width: 15rem; border: none;">
+                <p class="icons-style">
+                    <i class="fa-solid fa-users"></i>
+                </p>
+                <div class="card-body">
+                  <h5 class="card-title text-center">Matrículas</h5>
+                </div>
             </div>
-        </div>
+        </a>
     </div>
 </div>
