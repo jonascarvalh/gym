@@ -5,6 +5,7 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from .forms import RegisterForm
 from django.urls import reverse
+from django.contrib import messages
 
 # Create your views here.
 def enrollment_view(request):
@@ -41,9 +42,6 @@ def search(request):
     })
 
 def add_view(request):
-    if request.user.is_authenticated:
-        return redirect('users:menu')
-
     register_form_data = request.session.get('register_form_data', None)
     form = RegisterForm(register_form_data)
 
@@ -55,3 +53,21 @@ def add_view(request):
     })
 
 
+def add_create(request):
+    if not request.POST:
+        raise Http404()
+    
+    POST = request.POST
+    request.session['register_form_data'] = POST
+    form = RegisterForm(POST)
+
+    if form.is_valid():
+        user = form.save(commit=False)
+        user.save()
+
+        messages.success(request, 'O usuário foi criado.')
+
+        del(request.session['register_form_data'])
+        # return redirect(reverse('enrollment:enrollment_view'))
+    
+    return redirect('enrollment:add_view')

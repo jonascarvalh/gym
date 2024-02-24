@@ -21,16 +21,12 @@ class RegisterForm(forms.ModelForm):
         add_placeholder(self.fields['name'], 'Nome Completo')
         add_placeholder(self.fields['cpf'], 'CPF')
         add_placeholder(self.fields['sig_register'], 'Matrícula no SIG')
-        add_placeholder(self.fields['ocupation'], 'Selecione')
-        # add_placeholder(self.fields['is_registered'], 'Selecione')
 
         for i, value in self.fields.items():
             add_attr(self.fields[i], 'class', 'form-control')
-            # if self.fields[i].help_text == '':
-            #     add_attr(self.fields[i], 'class', 'mb-3')
 
     class Meta:
-        model = User
+        model = Registration
         fields = [
             'name',
             'cpf',
@@ -77,7 +73,7 @@ class RegisterForm(forms.ModelForm):
 
     def clean_cpf(self):
         cpf = self.cleaned_data.get('cpf', '')
-        exists = User.objects.filter(cpf=cpf).exists()
+        exists = Registration.objects.filter(cpf=cpf).exists()
 
         if exists:
             raise ValidationError(
@@ -88,7 +84,7 @@ class RegisterForm(forms.ModelForm):
     
     def clean_sig(self):
         sig_register = self.cleaned_data.get('sig_register', '')
-        exists = User.objects.filter(sig_register=sig_register).exists()
+        exists = Registration.objects.filter(sig_register=sig_register).exists()
 
         if exists:
             raise ValidationError(
