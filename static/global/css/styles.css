@@ -2,6 +2,7 @@
 
 :root {
     --color-primary: #003366;
+    --color-primary-2: #001a33;
     --color-white: #fff;
     --spacing-gutter-medium: 3rem;
     --spacing-gutter-large: 4rem;
@@ -14,6 +15,7 @@
     --color-warning-dark: #927f40;
     --color-error-dark: #da525d;
 }
+
 
 /* pagination */
 .active>.page-link, .page-link.active {
@@ -42,9 +44,14 @@
 
 .button-1 {
     border: 3px solid;
-    color: var(--color-primary);
-    border-color: var(--color-primary);
-    border-radius: 5px;
+    color: var(--color-white);
+    background-color: var(--color-primary);
+}
+
+.button-1:hover {
+    border: 3px solid;
+    color: var(--color-white);
+    background-color: var(--color-primary-2);
 }
 
 .main-container {
@@ -182,4 +189,9 @@
     border: 1px solid var(--color-debug-dark);
     background: var(--color-debug-light);
     color: var(--color-debug-dark);
+}
+
+.button-search{
+    display: flex;
+    justify-content: space-between;
 }

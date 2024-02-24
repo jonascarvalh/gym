@@ -7,6 +7,17 @@
 {% block content %}
     <div class="container">
         <h2>Matrículas</h2>
+        <div class="button-search">
+            <div class="">
+                <form action="" method="GET" class="form-inline">
+                    <input type="search" class="form-control mr-sm-2" name="q" value="{{ search_term }}" placeholder="Digite para pesquisar..." required>
+                    <button type="submit" class="btn btn-outline-success my-2 my-sm-0"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+            <div >
+                <button type="submit" class="btn button-1">Nova Matrícula</button>
+            </div>
+        </div>
         <table class="table table-striped">
             <thead>
                 <tr>
