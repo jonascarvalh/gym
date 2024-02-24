@@ -6,6 +6,7 @@ from django.db.models import Q
 from .forms import RegisterForm
 from django.urls import reverse
 from django.contrib import messages
+from utils.django_forms import add_attr
 
 # Create your views here.
 def enrollment_view(request):
@@ -68,6 +69,30 @@ def add_create(request):
         messages.success(request, 'O usuário foi criado.')
 
         del(request.session['register_form_data'])
-        # return redirect(reverse('enrollment:enrollment_view'))
+        return redirect(reverse('enrollment:add_view'))
     
     return redirect('enrollment:add_view')
+
+def to_view(request, id):
+    enrollment = Registration.objects.filter(
+        pk=id
+    ).order_by('-id').first()
+
+    register_form_data = request.session.get('register_form_data', None)
+
+    form = RegisterForm(register_form_data)
+
+    for field_name, field in form.fields.items():
+        if hasattr(field, 'choices'):
+            add_attr(form.fields[field_name], 'disabled', True)
+        else:    
+            add_attr(form.fields[field_name], 'disabled', True)
+            add_attr(form.fields[field_name], 'value', getattr(enrollment, field_name))
+
+    return render(
+        request, 'users/pages/register_view.html', {
+            'form': form,
+            'title': 'Informações do Matriculado',
+            'form_action': reverse('enrollment:add_create'), # change here
+            'enrollment': enrollment
+    })

@@ -38,7 +38,8 @@ class RegisterForm(forms.ModelForm):
     name = forms.CharField(
         error_messages={'required': 'Digite um nome.'},
         required=True,
-        label='Nome:'
+        label='Nome:',
+        widget=forms.TextInput(attrs={'disabled': False}),
     )
 
     cpf = forms.CharField(
@@ -46,6 +47,7 @@ class RegisterForm(forms.ModelForm):
         required=True,
         label='CPF:',
         validators=[validate_cpf],
+        widget=forms.TextInput(attrs={'disabled': False}),
     )
 
     sig_register = forms.CharField(
@@ -54,22 +56,23 @@ class RegisterForm(forms.ModelForm):
             'Caso seja um Estudante ou Funcionário este campo é obrigatório.'
         ),
         error_messages= {'required': 'Esse campo não pode ser vazio.'},
-        validators=[validate_sig]
+        validators=[validate_sig],
+        widget=forms.TextInput(attrs={'disabled': False}),
     )
 
     ocupation = forms.ChoiceField(
         error_messages={'required': 'Este Campo é obrigatório.'},
         label='Ocupação:',
-        widget=forms.Select(choices=choice_ocupation),
-        choices=choice_ocupation
+        widget=forms.Select(attrs={'disabled': False}),
+        choices=choice_ocupation,
     )
 
     is_registered = forms.ChoiceField(
         required=True,
-        widget=forms.Select(choices=choice_registered),
+        widget=forms.Select(choices=choice_registered, attrs={'disabled': False}),
         error_messages={'required': 'Este campo é obrigatório.'},
         label='Matriculado',
-        choices=choice_registered
+        choices=choice_registered,
     )
 
     def clean_cpf(self):

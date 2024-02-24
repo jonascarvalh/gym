@@ -64,6 +64,21 @@
     background-color: #D9534F;
 }
 
+.button-view:hover {
+    color: var(--color-white);
+    background-color: #448ea4;
+}
+
+.button-edit:hover {
+    color: var(--color-white);
+    background-color: #bf8a3f;
+}
+
+.button-delete:hover {
+    color: var(--color-white);
+    background-color: #b34542;
+}
+
 .button-1:hover {
     border: 3px solid;
     color: var(--color-white);
