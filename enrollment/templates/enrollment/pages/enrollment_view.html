@@ -5,17 +5,22 @@
 {% endblock title %}
 
 {% block content %}
-    <div class="container">
-        <h2>Matrículas</h2>
+    <div class="container mt-3">
+        <h2 class="text-center mb-3">Matrículas</h2>
         <div class="button-search">
-            <div class="">
-                <form action="" method="GET" class="form-inline">
-                    <input type="search" class="form-control mr-sm-2" name="q" value="{{ search_term }}" placeholder="Digite para pesquisar..." required>
-                    <button type="submit" class="btn btn-outline-success my-2 my-sm-0"><i class="fas fa-search"></i></button>
+            <div class="inline-form">
+                <form action="{% url "enrollment:search" %}" method="GET" class="form-inline">
+                    <div class="input-group">
+                        <input type="search" class="form-control mr-2" name="q" value="{{ search_term }}" placeholder="Digite para pesquisar..." required>
+                        <div style="margin-left: 10px;"></div>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-outline-success ml-2"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
                 </form>
-            </div>
-            <div >
-                <button type="submit" class="btn button-1">Nova Matrícula</button>
+            </div>            
+            <div>
+                <button type="submit" class="btn button-1">Adicionar</button>
             </div>
         </div>
         <table class="table table-striped">
