@@ -49,11 +49,11 @@ def validate_cpf(cpf):
     # if second digit is correct
     if digito2 != int(cpf[10]):
         raise ValidationError(
-            ('DigiteDigite um CPF válido.'),
+            ('Digite um CPF válido.'),
             code='invalid'
         )
     
-def validade_sig(enrollment):
+def validate_sig(enrollment):
     if len(enrollment) != 11:
         raise ValidationError(
             ('Digite uma matrícula válida.'),

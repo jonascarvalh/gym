@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from utils.django_forms import add_attr, add_placeholder, strong_password
+from utils.django_forms import *
 from enrollment.models import Registration
 
 class RegisterForm(forms.ModelForm):
@@ -44,7 +44,8 @@ class RegisterForm(forms.ModelForm):
     cpf = forms.CharField(
         error_messages={'required': 'Digite um CPF.'},
         required=True,
-        label='CPF:'
+        label='CPF:',
+        validators=[validate_cpf],
     )
 
     sig_register = forms.CharField(
@@ -52,7 +53,8 @@ class RegisterForm(forms.ModelForm):
         help_text=(
             'Caso seja um Estudante ou Funcionário este campo é obrigatório.'
         ),
-        error_messages= {'required': 'Esse campo não pode ser vazio.',},
+        error_messages= {'required': 'Esse campo não pode ser vazio.'},
+        validators=[validate_sig]
     )
 
     ocupation = forms.ChoiceField(
@@ -66,7 +68,6 @@ class RegisterForm(forms.ModelForm):
         required=True,
         widget=forms.Select(choices=choice_registered),
         error_messages={'required': 'Este campo é obrigatório.'},
-        validators=[],
         label='Matriculado',
         choices=choice_registered
     )
@@ -82,13 +83,13 @@ class RegisterForm(forms.ModelForm):
             )
         return cpf
     
-    def clean_sig(self):
+    def clean_sig_register(self):
         sig_register = self.cleaned_data.get('sig_register', '')
         exists = Registration.objects.filter(sig_register=sig_register).exists()
 
         if exists:
             raise ValidationError(
-                'Esta matrícula já foi efetuada!',
+                'Essa matrícula já está no sistema!',
                 code='invalid',
             )
         return sig_register
