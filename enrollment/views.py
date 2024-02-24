@@ -10,7 +10,7 @@ from utils.django_forms import add_attr
 
 # Create your views here.
 def enrollment_view(request):
-    registers = Registration.objects.all()
+    registers = Registration.objects.all().order_by('name')
 
     paginator = Paginator(registers, 8)
     page      = request.GET.get('page')
@@ -31,7 +31,7 @@ def search(request):
             Q(name__icontains=search_term) | # "OR" in database
             Q(sig_register__icontains=search_term),
         ),
-    ).order_by('-id')
+    ).order_by('name')
 
 
     paginator = Paginator(registers, 8)
@@ -76,7 +76,7 @@ def add_create(request):
 def to_view(request, id):
     enrollment = Registration.objects.filter(
         pk=id
-    ).order_by('-id').first()
+    ).order_by('name').first()
 
     register_form_data = request.session.get('register_form_data', None)
 
