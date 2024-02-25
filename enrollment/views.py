@@ -126,3 +126,13 @@ def edit_create(request, id):
     
     request.session['register_form_data'] = request.POST
     return redirect(url_parameter)
+
+def delete_create(request, id):
+    # add here later: request.<is_avaliador, is_admin>
+    enrollment = get_object_or_404(Registration, pk=id)
+    name = enrollment.name
+    enrollment.delete()
+
+    messages.success(request, f'A matrícula do(a) {name} foi deletada!')
+    
+    return redirect(reverse('enrollment:enrollment_view'))

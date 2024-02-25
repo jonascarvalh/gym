@@ -7,6 +7,11 @@
 {% block content %}
     <div class="container mt-2">
         <h2 class="text-center mb-1">Matrículas</h2>
+        <div class="form-content form-content-grid my-2" id='message'>
+            <div class="form-group">
+                {% include "global/partials/message.html" %}
+            </div>
+        </div>
         <div class="space-search">
             <div class="inline-form">
                 {% include "global/partials/search.html" %}
@@ -31,13 +36,14 @@
                         <td>{{ register.is_registered }}</td>
                         <td>{{ register.get_ocupation_display }}</td>
                         <td>
+                            {% include "enrollment/partials/modal_delete.html" %}
                             <a class="btn button-view me-1" href="{% url "enrollment:to_view" id=register.pk %}">
                                 <i class="fa-solid fa-eye"></i>
                             </a>
                             <a class="btn button-edit me-1" href="{% url "enrollment:to_edit" id=register.pk %}">
                                 <i class="fa-solid fa-pen"></i>
                             </a>
-                            <a class="btn button-delete me-1" href="">
+                            <a class="btn button-delete me-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 <i class="fa-solid fa-trash"></i>
                             </a>
                         </td>
@@ -67,4 +73,13 @@
             </ul>
           </nav>
     </div>
+    <script>
+        // Função para excluir o elemento após um certo tempo
+        setTimeout(function() {
+            var elementoParaExcluir = document.getElementById('message');
+            if (elementoParaExcluir) {
+                elementoParaExcluir.remove();
+            }
+        }, 3000); 
+    </script>
 {% endblock content %}
