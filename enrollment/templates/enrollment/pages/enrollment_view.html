@@ -24,7 +24,7 @@
             <thead>
                 <tr>
                     <th>Nome</th>
-                    <th>Matriculado</th>
+                    <th>Status</th>
                     <th>Ocupação</th>
                     <th>Ação</th>
                 </tr>
@@ -33,7 +33,7 @@
                 {% for register in registers %}
                     <tr>
                         <td>{{ register.name }}</td>
-                        <td>{{ register.is_registered }}</td>
+                        <td>{{ register.get_is_registered_display }}</td>
                         <td>{{ register.get_ocupation_display }}</td>
                         <td>
                             {% include "enrollment/partials/modal_delete.html" %}

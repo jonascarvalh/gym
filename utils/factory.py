@@ -12,6 +12,7 @@ fake = Faker('pt_BR')
 
 
 ocupations = ['E', 'F', 'Ex']
+is_registered = ['True', 'False']
 
 def make_registration():
     return {
@@ -19,5 +20,5 @@ def make_registration():
         'cpf': fake.random_number(digits=11, fix_len=True),
         'sig_register': fake.random_number(digits=11, fix_len=True),
         'ocupation': random.choice(ocupations),
-        'is_registered': random.choice(['True', 'False'])
+        'is_registered': random.choice(is_registered)
     }
