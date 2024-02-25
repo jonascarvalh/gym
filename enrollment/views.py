@@ -50,8 +50,8 @@ def add_view(request):
         request, 'users/pages/register_view.html', {
             'form': form,
             'title': 'Adicionar',
-            'form_action': reverse('enrollment:add_create'), # change here
-    })
+            'form_action': reverse('enrollment:add_create'),
+        })
 
 
 def add_create(request):
@@ -66,7 +66,7 @@ def add_create(request):
         user = form.save(commit=False)
         user.save()
 
-        messages.success(request, 'O usuário foi criado.')
+        messages.success(request, 'O usuário foi salvo.')
 
         del(request.session['register_form_data'])
         return redirect(reverse('enrollment:add_view'))
@@ -78,9 +78,7 @@ def to_view(request, id):
         pk=id
     ).order_by('name').first()
 
-    register_form_data = request.session.get('register_form_data', None)
-
-    form = RegisterForm(register_form_data, instance=enrollment)
+    form = RegisterForm(instance=enrollment)
 
     for field_name, field in form.fields.items():
         field.widget.attrs['disabled']=True
@@ -96,5 +94,37 @@ def to_view(request, id):
 def to_edit(request, id):
     enrollment = Registration.objects.filter(
         pk=id
-    ).order_by('name')
+    ).order_by('name').first()
+
+    form = RegisterForm(instance=enrollment)
+
+    url_parameter = reverse('enrollment:edit_create', kwargs={'id': enrollment.id})
+    return render(
+        request, 'users/pages/register_view.html', {
+            'form': form,
+            'title': 'Atualizar Matrícula',
+            'enrollment': enrollment,
+            'form_action': url_parameter,
+    })
     
+def edit_create(request, id):
+    if not request.POST:
+        raise Http404()
+    
+    POST = request.POST
+    enrollment = Registration.objects.get(pk=id)
+    form = RegisterForm(POST, instance=enrollment)
+    
+    url_parameter = reverse('enrollment:to_edit', kwargs={'id': enrollment.id})
+    
+    if form.is_valid():
+        print(enrollment.name)
+        enrollment = form.save(commit=False)
+        form.save()
+
+        messages.success(request, 'O usuário foi salvo.')
+
+        return redirect(url_parameter)
+    
+    messages.error(request, 'Falha ao atualizar.')
+    return redirect(url_parameter)

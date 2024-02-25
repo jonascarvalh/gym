@@ -79,10 +79,14 @@ class RegisterForm(forms.ModelForm):
 
     def clean_cpf(self):
         cpf = self.cleaned_data.get('cpf', '')
-        exists = Registration.objects.filter(cpf=cpf).exists()
+        instance = self.instance
+        if instance and instance.pk:
+            exists = Registration.objects.exclude(pk=instance.pk).filter(cpf=cpf).exists()
+        else:
+            exists = Registration.objects.filter(cpf=cpf).exists()
 
         if exists:
-            raise ValidationError(
+            raise forms.ValidationError(
                 'Este CPF já foi cadastrado!',
                 code='invalid',
             )
@@ -90,10 +94,14 @@ class RegisterForm(forms.ModelForm):
     
     def clean_sig_register(self):
         sig_register = self.cleaned_data.get('sig_register', '')
-        exists = Registration.objects.filter(sig_register=sig_register).exists()
+        instance = self.instance
+        if instance and instance.pk:
+            exists = Registration.objects.exclude(pk=instance.pk).filter(sig_register=sig_register).exists()
+        else:
+            exists = Registration.objects.filter(sig_register=sig_register).exists()
 
         if exists:
-            raise ValidationError(
+            raise forms.ValidationError(
                 'Essa matrícula já está no sistema!',
                 code='invalid',
             )
