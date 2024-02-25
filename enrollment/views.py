@@ -80,7 +80,7 @@ def to_view(request, id):
 
     register_form_data = request.session.get('register_form_data', None)
 
-    form = RegisterForm(register_form_data)
+    form = RegisterForm(register_form_data, instance=enrollment)
 
     for field_name, field in form.fields.items():
         if hasattr(field, 'choices'):
@@ -88,7 +88,6 @@ def to_view(request, id):
             add_attr(form.fields[field_name], 'class', 'disabled') 
         else:    
             field.widget.attrs['disabled']=True
-            add_attr(form.fields[field_name], 'value', getattr(enrollment, field_name))
             add_attr(form.fields[field_name], 'class', 'disabled')
 
     return render(
@@ -97,3 +96,9 @@ def to_view(request, id):
             'title': 'Informações da Matrícula',
             'enrollment': enrollment
     })
+
+def to_edit(request, id):
+    enrollment = Registration.objects.filter(
+        pk=id
+    ).order_by('name')
+    

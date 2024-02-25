@@ -11,7 +11,7 @@ fake = Faker('pt_BR')
 # print(signature(fake.random_number))
 
 
-ocupations = ['Estudante', 'Funcionário', 'Público Exteno']
+ocupations = ['E', 'F', 'Ex']
 
 def make_registration():
     return {
