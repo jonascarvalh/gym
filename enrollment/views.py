@@ -43,7 +43,7 @@ def search(request):
     })
 
 def add_view(request):
-    register_form_data = request.session.get('register_form_data', None)
+    register_form_data = request.session.pop('register_form_data', None)
     form = RegisterForm(register_form_data)
 
     return render(

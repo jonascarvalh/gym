@@ -39,4 +39,16 @@
             </div>
         {% endif %}
     </form>
+    <script>
+        document.getElementById('id_ocupation').addEventListener('change', function() {
+            var field = document.getElementById('id_sig_register');
+            var select = document.getElementById('id_ocupation');
+    
+            if (select.value == 'E' | select.value == 'F') {
+                field.setAttribute('required', 'required');
+            } else {
+                field.removeAttribute('required');
+            }
+        });
+    </script>    
 </div>

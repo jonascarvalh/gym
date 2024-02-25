@@ -53,6 +53,7 @@ class RegisterForm(forms.ModelForm):
     )
 
     sig_register = forms.CharField(
+        required=False,
         label='Matrícula do SIG:',
         help_text=(
             'Caso seja um Estudante ou Funcionário este campo é obrigatório.'
@@ -63,6 +64,7 @@ class RegisterForm(forms.ModelForm):
     )
 
     ocupation = forms.ChoiceField(
+        required=True,
         error_messages={'required': 'Este Campo é obrigatório.'},
         label='Ocupação:',
         widget=forms.Select(attrs={'disabled': False}),
