@@ -83,12 +83,8 @@ def to_view(request, id):
     form = RegisterForm(register_form_data, instance=enrollment)
 
     for field_name, field in form.fields.items():
-        if hasattr(field, 'choices'):
-            field.widget.attrs['disabled']=True
-            add_attr(form.fields[field_name], 'class', 'disabled') 
-        else:    
-            field.widget.attrs['disabled']=True
-            add_attr(form.fields[field_name], 'class', 'disabled')
+        field.widget.attrs['disabled']=True
+        add_attr(form.fields[field_name], 'class', 'disabled') 
 
     return render(
         request, 'users/pages/register_view.html', {
