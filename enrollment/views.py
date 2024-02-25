@@ -15,7 +15,7 @@ def enrollment_view(request):
     paginator = Paginator(registers, 8)
     page      = request.GET.get('page')
     objs_per_page = paginator.get_page(page)
-
+    
     return render(request,'enrollment/pages/enrollment_view.html', {
         'registers': objs_per_page,
     })
@@ -96,8 +96,9 @@ def to_edit(request, id):
         pk=id
     ).order_by('name').first()
 
-    form = RegisterForm(instance=enrollment)
+    register_form_data = request.session.get('register_form_data', None)
 
+    form = RegisterForm(register_form_data, instance=enrollment)
     url_parameter = reverse('enrollment:edit_create', kwargs={'id': enrollment.id})
     return render(
         request, 'users/pages/register_view.html', {
@@ -112,6 +113,7 @@ def edit_create(request, id):
         raise Http404()
     
     POST = request.POST
+    request.session['register_form_data'] = POST
     enrollment = Registration.objects.get(pk=id)
     form = RegisterForm(POST, instance=enrollment)
     
@@ -120,11 +122,11 @@ def edit_create(request, id):
     if form.is_valid():
         print(enrollment.name)
         enrollment = form.save(commit=False)
+        enrollment.cpf = form.cleaned_data['cpf']
         form.save()
 
         messages.success(request, 'O usuário foi salvo.')
-
+        del(request.session['register_form_data'])
         return redirect(url_parameter)
     
-    messages.error(request, 'Falha ao atualizar.')
     return redirect(url_parameter)
