@@ -51,4 +51,26 @@
             }
         });
     </script>    
+    <script>
+        var num1Input = document.getElementById('id_height');
+        var num2Input = document.getElementById('id_weight');
+        var resultadoInput = document.getElementById('id_imc');
+        
+        // Adiciona um ouvinte de eventos para o evento input
+        num1Input.addEventListener('input', calcular);
+        num2Input.addEventListener('input', calcular);
+
+        function calcular() {
+            num1Input.value = num1Input.value.replace(',', '.');
+            num2Input.value = num2Input.value.replace(',', '.');
+
+            var altura = parseFloat(num1Input.value) || 0; // Se não for um número válido, assume 0
+            var peso = parseFloat(num2Input.value) || 0;
+
+            // Realiza o cálculo (por exemplo, soma)
+            var resultado = peso/altura**2;
+            
+            resultadoInput.value = resultado;
+        }
+    </script>
 </div>

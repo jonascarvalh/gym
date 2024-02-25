@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 import re
+from assessment.models import Assessment
 
 def add_attr(field, attr_name, attr_new_val):
     existing_attr = field.widget.attrs.get(attr_name, '')
@@ -58,4 +59,12 @@ def validate_sig(enrollment):
         raise ValidationError(
             ('Digite uma matrícula válida.'),
             code='invalid'
+        )
+
+def validate_user(user):
+    register = Assessment.objects.filter(name=user).first()
+    if register:
+        raise ValidationError(
+            'Este usuário já foi avaliado!',
+            code='invalid',
         )

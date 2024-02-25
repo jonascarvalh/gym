@@ -6,6 +6,7 @@ from django.db.models import Q
 from django.urls import reverse
 from django.contrib import messages
 from utils.django_forms import add_attr
+from .forms import AssessmentForm
 
 # Create your views here.
 def assessment_view(request):
@@ -15,7 +16,7 @@ def assessment_view(request):
     page      = request.GET.get('page')
     objs_per_page = paginator.get_page(page)
     
-    return render(request,'assessment/pages/assessments_view.html', {
+    return render(request,'assessment/pages/assessment_view.html', {
         'registers': objs_per_page,
         'form_action_search': reverse('assessment:search'),
     })
@@ -28,11 +29,9 @@ def search(request):
     
     registers = Assessment.objects.filter(
         Q(
-            Q(name__icontains=search_term) | # "OR" in database
-            Q(sig_register__icontains=search_term),
+            Q(name__name__icontains=search_term) # "OR" in database
         ),
     ).order_by('name')
-
 
     paginator = Paginator(registers, 8)
     page      = request.GET.get('page')
@@ -41,3 +40,33 @@ def search(request):
     return render(request,'assessment/pages/assessment_view.html', {
         'registers': objs_per_page,
     })
+
+def add_view(request):
+    register_form_data = request.session.pop('register_form_data', None)
+    form = AssessmentForm(register_form_data)
+
+    return render(
+        request, 'users/pages/register_view.html', {
+            'form': form,
+            'title': 'Avaliação',
+            'form_action': reverse('assessment:add_create'),
+        })
+
+def add_create(request):
+    if not request.POST:
+        raise Http404()
+    
+    POST = request.POST
+    request.session['register_form_data'] = POST
+    form = AssessmentForm(POST)
+
+    if form.is_valid():
+        assessment = form.save(commit=False)
+        assessment.save()
+
+        messages.success(request, 'A avaliação foi salva.')
+
+        del(request.session['register_form_data'])
+        return redirect(reverse('assessment:add_view'))
+    
+    return redirect('assessment:add_view')
