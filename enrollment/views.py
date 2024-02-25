@@ -48,7 +48,7 @@ def add_view(request):
     form = RegisterForm(register_form_data)
 
     return render(
-        request, 'users/pages/register_view.html', {
+        request, 'enrollment/pages/to_view.html', {
             'form': form,
             'title': 'Adicionar',
             'form_action': reverse('enrollment:add_create'),
@@ -86,7 +86,7 @@ def to_view(request, id):
         add_attr(form.fields[field_name], 'class', 'disabled') 
 
     return render(
-        request, 'users/pages/register_view.html', {
+        request, 'enrollment/pages/to_view.html', {
             'form': form,
             'title': 'Informações da Matrícula',
             'enrollment': enrollment
@@ -100,7 +100,7 @@ def to_edit(request, id):
     
     url_parameter = reverse('enrollment:edit_create', kwargs={'id': enrollment.id})
     return render(
-        request, 'users/pages/register_view.html', {
+        request, 'enrollment/pages/to_view.html', {
             'form': form,
             'title': 'Atualizar Matrícula',
             'enrollment': enrollment,

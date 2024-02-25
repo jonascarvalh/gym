@@ -46,7 +46,7 @@ def add_view(request):
     form = AssessmentForm(register_form_data)
 
     return render(
-        request, 'users/pages/register_view.html', {
+        request, 'assessment/pages/to_view.html', {
             'form': form,
             'title': 'Avaliação',
             'form_action': reverse('assessment:add_create'),
@@ -83,7 +83,7 @@ def to_view(request, id):
         add_attr(form.fields[field_name], 'class', 'disabled') 
 
     return render(
-        request, 'users/pages/register_view.html', {
+        request, 'assessment/pages/to_view.html', {
             'form': form,
             'title': 'Informações da Avaliação',
             'enrollment': assessment
@@ -95,11 +95,9 @@ def to_edit(request, id):
     register_form_data = request.session.pop('register_form_data', None)
     form = AssessmentForm(register_form_data, instance=assessment)
     
-    form.fields['name'].disabled = True
-    
     url_parameter = reverse('assessment:edit_create', kwargs={'id': assessment.id})
     return render(
-        request, 'users/pages/register_view.html', {
+        request, 'assessment/pages/to_view.html', {
             'form': form,
             'title': 'Atualizar Avaliação',
             'enrollment': assessment,
