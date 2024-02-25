@@ -1,5 +1,5 @@
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <form action="{% url 'enrollment:delete_create' id=register.id %}" method="POST"> {% csrf_token %}
+<div class="modal fade" id="item-{{register.pk}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <form action="{% url 'enrollment:delete_create' id=register.pk %}" method="POST"> {% csrf_token %}
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">

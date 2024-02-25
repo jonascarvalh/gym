@@ -31,19 +31,19 @@
             </thead>
             <tbody>
                 {% for register in registers %}
+                    {% include "enrollment/partials/modal_delete.html" %}
                     <tr>
                         <td>{{ register.name }}</td>
                         <td>{{ register.get_is_registered_display }}</td>
                         <td>{{ register.get_ocupation_display }}</td>
                         <td>
-                            {% include "enrollment/partials/modal_delete.html" %}
                             <a class="btn button-view me-1" href="{% url "enrollment:to_view" id=register.pk %}">
                                 <i class="fa-solid fa-eye"></i>
                             </a>
                             <a class="btn button-edit me-1" href="{% url "enrollment:to_edit" id=register.pk %}">
                                 <i class="fa-solid fa-pen"></i>
                             </a>
-                            <a class="btn button-delete me-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <a class="btn button-delete me-1" data-bs-toggle="modal" data-bs-target="#item-{{register.pk}}">
                                 <i class="fa-solid fa-trash"></i>
                             </a>
                         </td>
