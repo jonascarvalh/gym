@@ -117,7 +117,6 @@ def edit_create(request, id):
     url_parameter = reverse('enrollment:to_edit', kwargs={'id': enrollment.id})
     
     if form.is_valid():
-        print(enrollment.name)
         enrollment = form.save(commit=False)
         enrollment.cpf = form.cleaned_data['cpf']
         form.save()

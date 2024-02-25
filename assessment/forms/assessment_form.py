@@ -29,9 +29,8 @@ class AssessmentForm(forms.ModelForm):
     name = forms.ModelChoiceField(
         required=True,
         label='Nome:',
-        widget=forms.Select(attrs={'disabled': False}),
+        # widget=forms.Select(attrs={'disabled': False}),
         queryset=Registration.objects.all(),
-        validators=[validate_user],
     )
 
     height = forms.CharField(
@@ -92,6 +91,20 @@ class AssessmentForm(forms.ModelForm):
         
         return weight
 
+    def clean_name(self):
+        name = self.cleaned_data.get('name', '')
+        instance = self.instance
+        if instance and instance.pk:
+            exists = Assessment.objects.exclude(pk=instance.pk).filter(name=name).exists()
+        else:
+            exists = Assessment.objects.filter(name=name).exists()
+
+        if exists:
+            raise forms.ValidationError(
+                'Já existe essa avaliação no sistema!',
+                code='invalid',
+            )
+        return name
 
     def clean(self):
         cleaned_data = super().clean()

@@ -72,11 +72,11 @@ def add_create(request):
     return redirect('assessment:add_view')
 
 def to_view(request, id):
-    enrollment = Assessment.objects.filter(
+    assessment = Assessment.objects.filter(
         pk=id
     ).order_by('name').first()
 
-    form = AssessmentForm(instance=enrollment)
+    form = AssessmentForm(instance=assessment)
 
     for field_name, field in form.fields.items():
         field.widget.attrs['disabled']=True
@@ -86,5 +86,41 @@ def to_view(request, id):
         request, 'users/pages/register_view.html', {
             'form': form,
             'title': 'Informações da Avaliação',
-            'enrollment': enrollment
+            'enrollment': assessment
     })
+
+def to_edit(request, id):
+    assessment = get_object_or_404(Assessment, pk=id)
+    
+    register_form_data = request.session.pop('register_form_data', None)
+    form = AssessmentForm(register_form_data, instance=assessment)
+    
+    form.fields['name'].disabled = True
+    
+    url_parameter = reverse('assessment:edit_create', kwargs={'id': assessment.id})
+    return render(
+        request, 'users/pages/register_view.html', {
+            'form': form,
+            'title': 'Atualizar Avaliação',
+            'enrollment': assessment,
+            'form_action': url_parameter,
+    })
+    
+def edit_create(request, id):
+    if not request.POST:
+        raise Http404()
+    
+    assessment = get_object_or_404(Assessment, pk=id)
+    form = AssessmentForm(request.POST, instance=assessment)
+    
+    url_parameter = reverse('assessment:to_edit', kwargs={'id': assessment.id})
+    
+    if form.is_valid():
+        user = form.save(commit=False)
+        user.save()
+
+        messages.success(request, 'A avaliação foi editada.')
+        return redirect(url_parameter)
+    
+    request.session['register_form_data'] = request.POST
+    return redirect(url_parameter)

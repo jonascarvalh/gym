@@ -60,11 +60,3 @@ def validate_sig(enrollment):
             ('Digite uma matrícula válida.'),
             code='invalid'
         )
-
-def validate_user(user):
-    register = Assessment.objects.filter(name=user).first()
-    if register:
-        raise ValidationError(
-            'Este usuário já foi avaliado!',
-            code='invalid',
-        )
