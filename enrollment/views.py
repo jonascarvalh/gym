@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, Http404
 from enrollment.models import Registration
 from django.core.paginator import Paginator
@@ -92,13 +92,11 @@ def to_view(request, id):
     })
 
 def to_edit(request, id):
-    enrollment = Registration.objects.filter(
-        pk=id
-    ).order_by('name').first()
-
-    register_form_data = request.session.get('register_form_data', None)
-
+    enrollment = get_object_or_404(Registration, pk=id)
+    
+    register_form_data = request.session.pop('register_form_data', None)
     form = RegisterForm(register_form_data, instance=enrollment)
+    
     url_parameter = reverse('enrollment:edit_create', kwargs={'id': enrollment.id})
     return render(
         request, 'users/pages/register_view.html', {
@@ -112,10 +110,8 @@ def edit_create(request, id):
     if not request.POST:
         raise Http404()
     
-    POST = request.POST
-    request.session['register_form_data'] = POST
-    enrollment = Registration.objects.get(pk=id)
-    form = RegisterForm(POST, instance=enrollment)
+    enrollment = get_object_or_404(Registration, pk=id)
+    form = RegisterForm(request.POST, instance=enrollment)
     
     url_parameter = reverse('enrollment:to_edit', kwargs={'id': enrollment.id})
     
@@ -126,7 +122,7 @@ def edit_create(request, id):
         form.save()
 
         messages.success(request, 'O usuário foi salvo.')
-        del(request.session['register_form_data'])
         return redirect(url_parameter)
     
+    request.session['register_form_data'] = request.POST
     return redirect(url_parameter)
