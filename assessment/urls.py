@@ -7,5 +7,6 @@ urlpatterns = [
     path('', assessment_view, name='assessment_view'),
     path('buscar/', search, name='search'),
     path('avaliar/', add_view, name='add_view'),
-    path('criar_avaliacao/', add_create, name='add_create')
+    path('criar_avaliacao/', add_create, name='add_create'),
+    path('<int:id>/', to_view, name='to_view')
 ]

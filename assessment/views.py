@@ -70,3 +70,21 @@ def add_create(request):
         return redirect(reverse('assessment:add_view'))
     
     return redirect('assessment:add_view')
+
+def to_view(request, id):
+    enrollment = Assessment.objects.filter(
+        pk=id
+    ).order_by('name').first()
+
+    form = AssessmentForm(instance=enrollment)
+
+    for field_name, field in form.fields.items():
+        field.widget.attrs['disabled']=True
+        add_attr(form.fields[field_name], 'class', 'disabled') 
+
+    return render(
+        request, 'users/pages/register_view.html', {
+            'form': form,
+            'title': 'Informações da Avaliação',
+            'enrollment': enrollment
+    })
