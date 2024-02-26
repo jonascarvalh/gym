@@ -9,16 +9,16 @@
       <div class="nav-config collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav justify-content-end flex-grow-1 gap-3">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+            <a class="nav-link active" aria-current="page" href="{% url 'home:home_view' %}">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Sobre</a>
+            <a class="nav-link disabled" href="#" disabled>Agendamentos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Avaliação</a>
+            <a class="nav-link" href="{% url 'assessment:assessment_view' %}">Avaliações</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Planos</a>
+            <a class="nav-link" href="{% url 'enrollment:enrollment_view' %}">Matrículas</a>
           </li>
         </ul>
       </div>

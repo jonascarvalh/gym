@@ -48,6 +48,19 @@
     background-color: var(--color-primary);
 }
 
+.button-2 {
+    border: 3px solid;
+    color: var(--color-white);
+    background-color: #218838;
+}
+
+.button-2:hover {
+    border: 3px solid;
+    color: var(--color-white);
+    background-color: #165924;
+}
+
+
 .button-view {
     color: var(--color-white);
     background-color: #5BC0DE;
