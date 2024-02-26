@@ -1,13 +1,13 @@
 <div class="modal fade" id="item-{{register.pk}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <form action="{% url 'enrollment:delete_create' id=register.pk %}" method="POST"> {% csrf_token %}
+  <form action="{% url 'assessment:delete_create' id=register.pk %}" method="POST"> {% csrf_token %}
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Deletar Matrícula</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Deletar Avaliação</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-              <p>Você tem certeza que deseja deletar a matrícula de {{ register.name }}?</p>
+              <p>Você tem certeza que deseja deletar a avaliação de {{ register.name }}?</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

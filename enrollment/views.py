@@ -129,7 +129,6 @@ def edit_create(request, id):
 
 def delete_create(request, id):
     # add here later: request.<is_avaliador, is_admin>
-    
     enrollment = get_object_or_404(Registration, pk=id)
     name = enrollment.name
     enrollment.delete()

@@ -11,4 +11,5 @@ urlpatterns = [
     path('<int:id>/', to_view, name='to_view'),
     path('<int:id>/editar', to_edit, name='to_edit'),
     path('<int:id>/editar_avaliacao', edit_create, name='edit_create'),
+    path('<int:id>/delete', delete_create, name='delete_create'),
 ]

@@ -122,3 +122,13 @@ def edit_create(request, id):
     
     request.session['register_form_data'] = request.POST
     return redirect(url_parameter)
+
+def delete_create(request, id):
+    # add here later: request.<is_avaliador, is_admin>
+    assessment = get_object_or_404(Assessment, pk=id)
+    name = assessment.name
+    assessment.delete()
+
+    messages.success(request, f'A avaliação do(a) {name} foi deletada!')
+    
+    return redirect(reverse('assessment:assessment_view'))

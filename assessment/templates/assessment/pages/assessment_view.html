@@ -24,16 +24,18 @@
             <thead>
                 <tr>
                     <th>Nome</th>
-                    <th>Status</th>
+                    <th>Status Avaliação</th>
+                    <th>Status Matrícula</th>
                     <th>Ação</th>
                 </tr>
             </thead>
             <tbody>
                 {% for register in registers %}
-                    {% include "enrollment/partials/modal_delete.html" %}
+                    {% include "assessment/partials/modal_delete.html" %}
                     <tr>
                         <td>{{ register.name }}</td>
-                        <td></td>
+                        <td>{{ register.get_is_evaluated_display }}</td>
+                        <td>{{ register.name.get_is_registered_display }}</td>
                         <td>
                             <a class="btn button-view me-1" href="{% url "assessment:to_view" id=register.pk %}">
                                 <i class="fa-solid fa-eye"></i>
