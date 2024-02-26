@@ -138,9 +138,12 @@ def edit_create(request, id):
 def delete_create(request, id):
     # add here later: request.<is_avaliador, is_admin>
     enrollment = get_object_or_404(Registration, pk=id)
-    name = enrollment.name
-    enrollment.delete()
 
-    messages.success(request, f'A matrícula do(a) {name} foi deletada!')
-    
-    return redirect(reverse('enrollment:enrollment_view'))
+    name = enrollment.name
+    try:
+        enrollment.delete()
+        messages.success(request, f'A matrícula do(a) {name} foi deletada!')
+        return redirect(reverse('enrollment:enrollment_view'))
+    except:
+        messages.success(request, f'Erro ao deletar {name}. Esse usuário possui avaliação!')
+        return redirect(reverse('enrollment:enrollment_view'))

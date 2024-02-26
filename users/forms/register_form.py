@@ -27,6 +27,7 @@ class RegisterForm(forms.ModelForm):
             'email',
             'password'
         ]
+
     first_name = forms.CharField(
         error_messages={'required': 'Digite seu nome.'},
         required=True,

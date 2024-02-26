@@ -94,17 +94,18 @@ class RegisterForm(forms.ModelForm):
     
     def clean_sig_register(self):
         sig_register = self.cleaned_data.get('sig_register', '')
-        instance = self.instance
-        if instance and instance.pk:
-            exists = Registration.objects.exclude(pk=instance.pk).filter(sig_register=sig_register).exists()
-        else:
-            exists = Registration.objects.filter(sig_register=sig_register).exists()
+        if sig_register != '':
+            instance = self.instance
+            if instance and instance.pk:
+                exists = Registration.objects.exclude(pk=instance.pk).filter(sig_register=sig_register).exists()
+            else:
+                exists = Registration.objects.filter(sig_register=sig_register).exists()
 
-        if exists:
-            raise forms.ValidationError(
-                'Essa matrícula já está no sistema!',
-                code='invalid',
-            )
+            if exists:
+                raise forms.ValidationError(
+                    'Essa matrícula já está no sistema!',
+                    code='invalid',
+                )
         return sig_register
     
     def clean(self):
