@@ -7,8 +7,9 @@ from django.urls import reverse
 from django.contrib import messages
 from utils.django_forms import add_attr
 from .forms import AssessmentForm
+from django.contrib.auth.decorators import login_required
 
-# Create your views here.
+@login_required(login_url='users:login', redirect_field_name='next')
 def assessment_view(request):
     registers = Assessment.objects.all().order_by('name')
 
@@ -21,6 +22,7 @@ def assessment_view(request):
         'form_action_search': reverse('assessment:search'),
     })
 
+@login_required(login_url='users:login', redirect_field_name='next')
 def search(request):
     search_term = request.GET.get('q', '').strip()
 
@@ -41,6 +43,7 @@ def search(request):
         'registers': objs_per_page,
     })
 
+@login_required(login_url='users:login', redirect_field_name='next')
 def add_view(request):
     register_form_data = request.session.pop('register_form_data', None)
     form = AssessmentForm(register_form_data)
@@ -52,6 +55,7 @@ def add_view(request):
             'form_action': reverse('assessment:add_create'),
         })
 
+@login_required(login_url='users:login', redirect_field_name='next')
 def add_create(request):
     if not request.POST:
         raise Http404()
@@ -71,6 +75,7 @@ def add_create(request):
     
     return redirect('assessment:add_view')
 
+@login_required(login_url='users:login', redirect_field_name='next')
 def to_view(request, id):
     assessment = Assessment.objects.filter(
         pk=id
@@ -89,6 +94,7 @@ def to_view(request, id):
             'enrollment': assessment
     })
 
+@login_required(login_url='users:login', redirect_field_name='next')
 def to_edit(request, id):
     assessment = get_object_or_404(Assessment, pk=id)
     
@@ -103,7 +109,8 @@ def to_edit(request, id):
             'enrollment': assessment,
             'form_action': url_parameter,
     })
-    
+
+@login_required(login_url='users:login', redirect_field_name='next')
 def edit_create(request, id):
     if not request.POST:
         raise Http404()
@@ -123,6 +130,7 @@ def edit_create(request, id):
     request.session['register_form_data'] = request.POST
     return redirect(url_parameter)
 
+@login_required(login_url='users:login', redirect_field_name='next')
 def delete_create(request, id):
     # add here later: request.<is_avaliador, is_admin>
     assessment = get_object_or_404(Assessment, pk=id)
