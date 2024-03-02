@@ -54,6 +54,18 @@
     background-color: #218838;
 }
 
+.button-3 {
+    border: 3px solid;
+    color: var(--color-white);
+    background-color: #D9534F;
+}
+
+.button-3:hover {
+    border: 3px solid;
+    color: var(--color-white);
+    background-color: #a03d3a;
+}
+
 .button-2:hover {
     border: 3px solid;
     color: var(--color-white);

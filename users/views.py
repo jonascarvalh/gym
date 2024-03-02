@@ -75,16 +75,12 @@ def login_create(request):
     
     return redirect(reverse('users:menu'))
 
-@login_required(login_url='users:login', redirect_field_name='next')
 def logout_view(request):
     if not request.POST:
         return redirect('users:login')
     
-    if request.POST.get('username') != request.user.username:
-        return redirect('users:login')
-    
     logout(request)
-    return redirect(reverse('users:login'))
+    return redirect(reverse('home:home_view'))
 
 @login_required(login_url='users:login', redirect_field_name='next')
 def menu_view(request):

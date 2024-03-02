@@ -7,7 +7,7 @@
 {% block content %}
     <div class="container">
         <h1 class="text-center my-5">Academia da UEMA</h1>
-    {% if not request.is_authenticated %}
+    {% if not request.user.is_authenticated %}
         <div class="d-flex justify-content-center gap-3">
             <a href="{% url 'users:login'%}" class="btn button-1">
                 Login
@@ -17,10 +17,21 @@
             </a>
         </div>
     {% else %}
+        <h2 class="text-center my-3">
+            Olá, {{ request.user }}!
+        </h2>
         <div class="d-flex justify-content-center gap-3">
             <a href="{% url 'users:login'%}" class="btn button-1">
-                Entrar
+                Menu
             </a>
+            <form action="{% url 'users:logout' %}" method="POST"> {% csrf_token %}
+                <div class="d-flex justify-content-end form-group">
+                    <button type="submit" class="btn button-3">Sair</button>
+                </div>
+            </form>
+        </div>
+        <div class="d-flex justify-content-center gap-3">
+           
         </div>
     {% endif %}
     </div>
