@@ -1,5 +1,9 @@
-# Gym UEMA
-> Este projeto foi desenvolvido como requisito para obtenção de nota na disciplina de Gestão de Projetos. Logo após, serviu como sistema para criação de um container Docker para a disciplina de sistema Distribuídos.
+<div align="center">
+    <h1>Gym UEMA</h1>
+    <p>
+        Este projeto foi desenvolvido como requisito para obtenção de nota na disciplina de Gestão de Projetos. Logo após, serviu como sistema para criação de um container Docker para a disciplina de sistema Distribuídos.
+    </p>
+</div>
 
 ## Instalação via Ambiente Virtual
 ```sh
