@@ -5,6 +5,13 @@
     </p>
 </div>
 
+## Instalação via Docker
+Inicie o compose:
+```sh
+docker-compose up
+```
+Um servidor Django estará rodando localmente na URL: http://127.0.0.1:8000/
+
 ## Instalação via Ambiente Virtual
 ```sh
 python -m venv venv
