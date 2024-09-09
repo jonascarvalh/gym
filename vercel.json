@@ -1,0 +1,13 @@
+{
+    "builds": [{
+        "src": "gym/wsgi.py",
+        "use": "@vercel/python",
+        "config": { "maxLambdaSize": "15mb", "runtime": "python3.11.9"}
+    }],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "gym/wsgi.py"
+        }
+    ]
+}
