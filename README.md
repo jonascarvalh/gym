@@ -5,6 +5,11 @@
     </p>
 </div>
 
+## Pré-visualização
+<div align="center">
+    <img style="width: 36rem;" src="gym.jpg"></img>
+</div>
+
 ## Instalação via Docker
 Inicie o compose:
 ```sh
