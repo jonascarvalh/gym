@@ -6,33 +6,47 @@
 
 {% block content %}
     <div class="container">
-        <h1 class="text-center my-5">Academia da UEMA</h1>
-    {% if not request.user.is_authenticated %}
-        <div class="d-flex justify-content-center gap-3">
-            <a href="{% url 'users:login'%}" class="btn button-1">
-                Login
-            </a>
-            <a href="{% url 'users:register'%}" class="btn button-2">
-                Registrar
-            </a>
-        </div>
-    {% else %}
-        <h2 class="text-center my-3">
-            Olá, {{ request.user }}!
-        </h2>
-        <div class="d-flex justify-content-center gap-3">
-            <a href="{% url 'users:login'%}" class="btn button-1">
-                Menu
-            </a>
-            <form action="{% url 'users:logout' %}" method="POST"> {% csrf_token %}
-                <div class="d-flex justify-content-end form-group">
-                    <button type="submit" class="btn button-3">Sair</button>
+        <div class="header-container">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <div class="main-title">
+                        <h1 class="mt-5 inter-black title-academia">Academia da</h1>
+                        <h1 class="inter-black uema-title">UEMA</h1>
+                    </div>
+                    <p class="subtitle">Buscando atender a comunidade acadêmica e externa.</p>
+                    {% if not request.user.is_authenticated %}
+                    <div class="mt-4 d-flex justify-content-start gap-3">
+                        <a href="{% url 'users:login'%}" class="btn button-1">
+                            Entrar no Sistema
+                        </a>
+                        <a href="{% url 'users:register'%}" class="btn button-2">
+                            Registrar no Sistema
+                        </a>
+                    </div>
+                    {% else %}
+                        <h2 class="text-center my-3">
+                            Olá, {{ request.user }}!
+                        </h2>
+                        <div class="d-flex justify-content-center gap-3">
+                            <a href="{% url 'users:login'%}" class="btn button-1">
+                                Menu
+                            </a>
+                            <form action="{% url 'users:logout' %}" method="POST"> {% csrf_token %}
+                                <div class="d-flex justify-content-end form-group">
+                                    <button type="submit" class="btn button-3">Sair</button>
+                                </div>
+                            </form>
+                        </div>
+                    {% endif %}
                 </div>
-            </form>
+                <div class="d-flex justify-content-center flex-column">
+                    <div class="d-flex gap-3">
+                        <i class="fa-solid fa-users icon-users"></i>
+                        <span class="number-users">+100</span>
+                    </div>
+                    <p class="phrase-users">Mais de <span class="qty-persons">100</span> pessoas beneficiadas.</p>
+                </div>
+            </div>
         </div>
-        <div class="d-flex justify-content-center gap-3">
-           
-        </div>
-    {% endif %}
     </div>
 {% endblock content %}

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 :root {
     --color-primary: #003366;
@@ -14,9 +15,65 @@
     --color-alert-dark: #927f40;
     --color-warning-dark: #927f40;
     --color-error-dark: #da525d;
+
+    --color-yellow: #FCB72E;
 }
 
+/* header */
+.inter-black {
+    font-family: "Inter", sans-serif;
+    font-weight: 900;
+}
 
+.title-academia {
+    color: var(--color-white);
+    font-size: 3.2rem;
+}
+
+.uema-title {
+    color: var(--color-yellow);
+    font-size: 6.8rem;
+}
+
+.header-container {
+    background-image: url("../images/background-gym.jpg");
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    padding: 3rem 2rem;
+}
+
+.subtitle {
+    color: var(--color-white);
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 0.8rem;
+}
+
+.main-title {
+    display: flex;
+    flex-direction: column;
+}
+
+.icon-users {
+    color: var(--color-yellow);
+    font-size: 3rem;
+}
+
+.number-users {
+    color: var(--color-white);
+    font-size: 2.5rem;
+}
+
+.phrase-users {
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    color: var(--color-white);
+}
+
+.qty-persons {
+    color: var(--color-yellow);
+}
 /* pagination */
 .active>.page-link, .page-link.active {
     background-color: var(--color-primary);
@@ -43,31 +100,26 @@
 }
 
 .button-1 {
-    border: 3px solid;
     color: var(--color-white);
     background-color: var(--color-primary);
 }
 
 .button-2 {
-    border: 3px solid;
     color: var(--color-white);
     background-color: #218838;
 }
 
 .button-3 {
-    border: 3px solid;
     color: var(--color-white);
     background-color: #D9534F;
 }
 
 .button-3:hover {
-    border: 3px solid;
     color: var(--color-white);
     background-color: #a03d3a;
 }
 
 .button-2:hover {
-    border: 3px solid;
     color: var(--color-white);
     background-color: #165924;
 }
@@ -104,7 +156,6 @@
 }
 
 .button-1:hover {
-    border: 3px solid;
     color: var(--color-white);
     background-color: var(--color-primary-2);
 }
